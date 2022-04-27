@@ -1,1 +1,1 @@
-# smartooth-web
+# web
