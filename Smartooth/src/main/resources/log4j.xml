@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  
+<!--  날짜별 로그 --> 
+<appender name="dailyFile" class="org.apache.log4j.DailyRollingFileAppender">    <!-- log4j-1.2.15.jar에 존재 -->
+    <!-- 이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함--> 
+     <param name="File" value="d://zlog.log" />
+    <!--  <param name="File" value="${catalina.home}/WEB-INF/log/output.log" /> -->
+    <!-- 파일생성 안됨<param name="File" value="${context.root}/WEB-INF/log/output.log" />  -->
+     
+    <param name="Append" value="true" />
+    <param name="Encoding" value="UTF-8" />
+    <!-- param name="MaxFileSize" value="100000KB" /> -->
+    <!-- param name="MaxBackupIndex" value="10" /> -->
+    <param name="DatePattern" value="'.'yyMMdd"/> 
+    <layout class="org.apache.log4j.PatternLayout"> 
+        <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%p] %m %n"/>
+    </layout> 
+</appender>     
+ 
+<!-- xml 로그--> 
+<!-- xml형식으로 로그를 남김 
+<appender name="xmlout" class="org.apache.log4j.FileAppender"> 
+    <param name="file" value="log4jxml.xml"/> 
+    <param name="Append" value="true"/> 
+    <layout class="org.apache.log4j.xml.XMLLayout"/> 
+</appender> 
+ -->
+ 
+<!-- 특정 로거 설정
+<logger name="org.springframework" additivity="false">
+    <level value="WARN" />
+    <appender-ref ref="dailyout" />
+    <appender-ref ref="stdout" />
+</logger>
+-->
+ 
+<!--
+  root 로거 기본 설정  
+    - ALL > TRACE > DEBUG > INFO > WARN > ERROR > FATAL > OFF
+-->
+<root>
+  <level value="ALL" />
+  <appender-ref ref="dailyFile"/>
+</root>
+ 
+</log4j:configuration> 

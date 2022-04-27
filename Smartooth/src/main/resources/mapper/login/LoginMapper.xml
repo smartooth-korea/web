@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.smartooth.mapper.LoginMapper">
+
+    <select id="selectById" resultType="hashmap">
+        SELECT * FROM ST_USER
+        WHERE ID = #{userId} 
+    </select>
+    
+    
+<!--     <select id="selectUserCnt" resultType="Integer"> -->
+<!--         SELECT COUNT(*) FROM ST_USER -->
+<!--     </select> -->
+    
+    
+<!--     <resultMap type="co.smartooth.dto.UserDto" id="selectUserList"> -->
+<!--         <result property="userNo" column="USER_NO"/> -->
+<!--         <result property="userId" column="USER_ID"/> -->
+<!--         <result property="userNm" column="USER_NAME"/> -->
+<!--         <result property="userPwd" column="USER_PWD"/> -->
+<!--         <result property="userNickname" column="USER_NICKNAME"/> -->
+<!--         <result property="birthDay" column="BIRTHDAY"/> -->
+<!--         <result property="sex" column="SEX"/> -->
+<!--         <result property="email" column="EMAIL"/> -->
+<!--         <result property="emailYn" column="EMAIL_YN"/> -->
+<!--         <result property="telNum" column="TEL_NUM"/> -->
+<!--         <result property="deleteYn" column="DELETE_YN"/> -->
+<!--         <result property="deleteDt" column="DELETE_DT"/> -->
+<!--         <result property="loginCk" column="LOGIN_CK"/> -->
+<!--         <result property="rgstDt" column="RGST_DT"/> -->
+<!--     </resultMap> -->
+</mapper>
