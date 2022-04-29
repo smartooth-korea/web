@@ -29,7 +29,8 @@ public class MailAuthInfo extends Authenticator{
     	password = value;
     }
 
-    @Value("${spring.mail.sendername}")
+//    @Value("${spring.mail.sendername}")
+    @Value("#{encoding['mail.sendername']}")
     public void setSenderName(String value) {
     	senderName = value;
     }

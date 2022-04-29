@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import co.smartooth.vo.UserVO;
+import co.smartooth.vo.MailAuthVO;
 
 @Controller
 public class LoginController {
@@ -36,11 +36,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/")
 	public String selectUserInfo() {
-
-		ModelAndView mv = new ModelAndView();
-
 		return "st/login/loginForm";
-
 	}
 	
 	///smartooth/app/user/signUp/emailAuth

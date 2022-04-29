@@ -1,6 +1,7 @@
 package co.smartooth.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -12,27 +13,32 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import co.smartooth.auth.MailAuthInfo;
-import co.smartooth.service.MailSendService;
+import co.smartooth.mapper.MailAuthMapper;
+import co.smartooth.service.MailAuthService;
+import co.smartooth.utils.CryptoUtil;
+import co.smartooth.vo.MailAuthVO;
 
-@PropertySource(value = { "classpath:application.properties" })
 @Service
-public class MailSendServiceImpl implements MailSendService{
+@PropertySource(value = { "classpath:application.properties"})
+public class MailAuthServiceImpl implements MailAuthService{
 	
-
+	@Autowired(required = false)
+	MailAuthMapper mailAuthMapper;
 	
-	int size;
-
 	// 인증번호 생성
+	int size;
 	private String getKey(int size) {
 		this.size = size;
 		return getAuthCode();
 	}
 
-	// 인증코드 난수 발생
+	// 이메일 인증번호 난수 발생
 	private String getAuthCode() {
 		Random random = new Random();
 		StringBuffer buffer = new StringBuffer();
@@ -48,11 +54,18 @@ public class MailSendServiceImpl implements MailSendService{
 
 
 @Override
-public void mailSend(String toEmail) {
-		
+public void sendMail(String userId) {
 	
-		// 6자리 난수 인증번호 생성
+		CryptoUtil cryptoUtil = new CryptoUtil(); 
+		// 이메일 인증번호 (6자리 난수) 생성
 		String authKey = getKey(6);
+		String encAuthKey = "";
+		
+		try {
+			encAuthKey = cryptoUtil.encrypt(authKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		Properties prop = System.getProperties();
 		
@@ -77,17 +90,18 @@ public void mailSend(String toEmail) {
 		String senderId = mailAuthInfo.getUsername();
 		String sernderName = mailAuthInfo.getSenderName();
 		
-		
+		MailAuthVO mailAuthVO = new MailAuthVO();
+		mailAuthVO.setUserId(userId);
+		mailAuthVO.setAuthKey(authKey);
 		
 		// 이메일 발송 전 authKey를 Database에 UPDATE
-		
-		
-		
-		
-		
-		
-		
-		
+		// 기준은 이메일(아이디)
+		try {
+			updateAuthKeyById(mailAuthVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
 
 		try {
 			// 보내는 날짜 지정
@@ -95,7 +109,7 @@ public void mailSend(String toEmail) {
 			// 발송자를 지정한다. 발송자의 메일, 발송자명
 			msg.setFrom(new InternetAddress(senderId, sernderName));
 			// 수신자의 메일을 생성한다.
-			InternetAddress to = new InternetAddress(toEmail);
+			InternetAddress to = new InternetAddress(userId);
 			// Message 클래스의 setRecipient() 메소드를 사용하여 수신자를 설정한다. setRecipient() 메소드로 수신자, 참조,
 			// Message.RecipientType.TO : 받는 사람 // Message.RecipientType.CC : 참조 // Message.RecipientType.BCC : 숨은 참조
 			msg.setRecipient(Message.RecipientType.TO, to);
@@ -131,11 +145,11 @@ public void mailSend(String toEmail) {
 			.append("								&nbsp;&nbsp;")
 			.append("							<a href='http://")
 			.append(serverInfo)
-			.append("/app/user/signUpConfirm?email=")
-			.append(toEmail)
+			.append("/app/user/signUp/emailConfirm?userId=")
+			.append(userId)
 			.append("&authKey=")
-			.append(authKey)
-			.append(" target='_blenk'>이메일 인증 확인</a>")
+			.append(encAuthKey)
+			.append("&target='_blenk'>이메일 인증 확인</a>")
 			.append("						</div>")
 			.append("						<p style='line-height: 1.4em; font-weight:bold'></p>")
 			.append("						<p style='font-size: 11px; color:#636363'></p>")
@@ -152,16 +166,11 @@ public void mailSend(String toEmail) {
 			.append("	</body>")
 			.append("</html>");
 			
-			// text로만 보내고 싶을 경우 setText를 사용
-			// msg.setText(sb.toString());
+			// text로만 보내고 싶을 경우 setText를 사용 (msg.setText(sb.toString());)
 			// html로 보내고 싶을 경우 setContents 사용
 			msg.setContent(sb.toString(), "text/html;charset=euc-kr");
-			
 			// Transport는 메일을 최종적으로 보내는 클래스로 메일을 전송			
 			Transport.send(msg);
-			
-					
-
 
 		} catch (AddressException ae) {
 			System.out.println("AddressException : " + ae.getMessage());
@@ -169,6 +178,48 @@ public void mailSend(String toEmail) {
 			System.out.println("MessagingException : " + me.getMessage());
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
+		}
+	}
+
+
+	@Override
+	public void updateAuthKeyById(MailAuthVO mailAuthVO) throws Exception {
+		
+		int isExistId = 0;
+		String userId = mailAuthVO.getUserId();
+		isExistId = mailAuthMapper.selectIdWhetherOrNot(userId);
+		
+		if(isExistId == 1) {
+			try {
+				mailAuthMapper.updateAuthKeyByUserId(mailAuthVO);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			return;
+		}
+	}
+
+	@Override
+	public void updateAuthStatus(String userId){
+		try {
+			mailAuthMapper.updateAuthStatus(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public boolean isValidation(MailAuthVO mailAuthVO) throws Exception {
+		
+		int isExistId = 0;
+		String userId = mailAuthVO.getUserId();
+		isExistId = mailAuthMapper.selectIdWhetherOrNot(userId);
+		
+		if(isExistId == 1) {
+			return true;
+		}else{
+			return false;
 		}
 	}
 }
