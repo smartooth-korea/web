@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.smartooth.mapper.UserMapper;
 import co.smartooth.service.UserService;
-import co.smartooth.vo.MailAuthVO;
 import co.smartooth.vo.UserVO;
 
 @Service

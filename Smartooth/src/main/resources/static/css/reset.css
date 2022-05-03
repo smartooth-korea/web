@@ -191,10 +191,6 @@ button{
     cursor:pointer
 }
 
-/*layout setting*/
-
-body{
-}
 *{
     text-rendering: optimizeLegibility;
 }

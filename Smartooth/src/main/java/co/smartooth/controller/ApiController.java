@@ -33,7 +33,7 @@ import co.smartooth.vo.UserVO;
 **/
 
 @Controller
-public class UserController {
+public class ApiController {
 	
 	@Autowired(required = false)
 	private UserService userService;

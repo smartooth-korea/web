@@ -194,6 +194,7 @@ button{
 /*layout setting*/
 
 body{
+	margin:0;
 }
 *{
     text-rendering: optimizeLegibility;

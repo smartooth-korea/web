@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import co.smartooth.vo.LoginVO;
 import co.smartooth.vo.MailAuthVO;
 
 @Controller
@@ -39,24 +40,18 @@ public class LoginController {
 		return "st/login/loginForm";
 	}
 	
-	///smartooth/app/user/signUp/emailAuth
-	// 관리자 웹 로그인
-//	@RequestMapping(value={"/" , "/login"}, method=RequestMethod.GET)
-//	@RequestMapping(value="/", method=RequestMethod.GET)
-//    public ModelAndView loginForm(LoginVO loginVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
-//        
-//		System.out.println("왜 여기 안걸림?");
-//		System.out.println("왜 여기 안걸림?");
-//		System.out.println("왜 여기 안걸림?");
-//		System.out.println("왜 여기 안걸림?");
+	//	 관리자 웹 로그인
+//	@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	@RequestMapping(value="/login.do")
+    public String loginForm(LoginVO loginVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
+        
 //        if(rememberCookie!=null) {
 //            loginVO.setUserId(rememberCookie.getValue());
 //            loginVO.setRememberId(true);
 //        }
-//        
-//        ModelAndView mv = new ModelAndView("st/login/loginForm2");
-//        return mv;
-//    }
+		System.out.println("login.do");
+		return "redirect:/st/main.do";
+	}
 	
 	
 	@RequestMapping("/logout")
@@ -65,34 +60,5 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("redirect:/");
         return mv;
     }
-
-
-	
-	
-
-//	@RequestMapping(value = "/login.do", method = { RequestMethod.POST })
-//	public String login(HttpServletRequest request, Model model, LoginVO loginVo) throws Exception {
-//
-//		LOGIN_RESULT loginResult = LOGIN_RESULT.OK;
-
-//	    if (Validate.isEmpty(loginVo.getEncMgrId())) {
-//	      return alertAndRedirect(model, this.messageSource.getMessage("login.login.001", null, 
-//	            LocaleContextHolder.getLocale()), "/login/loginForm.do");
-//	    }
-//	    if (Validate.isEmpty(loginVo.getEncMgrPwd())) {
-//	      return alertAndRedirect(model, this.messageSource.getMessage("login.login.002", null, 
-//	            LocaleContextHolder.getLocale()), "/login/loginForm.do");
-//	    }
-//
-//		HttpSession session = request.getSession(true);
-//
-//		return "redirect:/main/main.do";
-//	}
-	
-	
-	
-	
-	
-	
 	
 }

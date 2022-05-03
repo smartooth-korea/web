@@ -85,7 +85,6 @@ public class MailAuthController {
 		if(mailAuthService.isValidation(mailAuthVO)) {
 			// Datebase에 인증 상태를 업데이트
 			mailAuthService.updateAuthStatus(userId);
-			
 		}
 		// AUTH_STATUS의 상태를 변경한 후 로그인 화면으로 redirect
 		return "redirect:/";
