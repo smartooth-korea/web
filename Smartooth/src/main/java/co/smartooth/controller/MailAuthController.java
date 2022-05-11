@@ -1,5 +1,6 @@
 package co.smartooth.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,56 +23,55 @@ import co.smartooth.service.MailAuthService;
 import co.smartooth.service.impl.MailAuthServiceImpl;
 import co.smartooth.utils.CryptoUtil;
 import co.smartooth.vo.MailAuthVO;
+import co.smartooth.vo.UserVO;
 
 @Controller
 public class MailAuthController {
 
-//	@Autowired(required = false)
-//	UserService userService;
 
-	// 메일 인증
+	/**
+	 *사용자 생성 및 인증번호 생성 후 Database INSERT
+	 * */
 	@Autowired(required = false)
 	private MailAuthService mailAuthService;
 
-//	@RequestMapping("/smartooth/app/user/signUp")
-//	public void signUp(@ModelAttribute UserVo userVo) throws Exception {
-	// DB에 기본정보 insert :: 회원가입 양식
-//		userService.signUp(userVo);
+	//@RequestMapping("/app/user/signUp/emailAuth")
+//	@RequestMapping(value="/app/user/emailAuth", method = {RequestMethod.POST})
+	@RequestMapping(value="/app/user/emailAuth", method = {RequestMethod.GET})
+	@ResponseBody
+	public HashMap<String,Object> mailAuth(@RequestParam Map<String, String> map, ModelAndView mv) {
 
-	// 임의의 authKey 생성 & 이메일 발송
-//		String authKey = mailSendService.sendAuthMail(userVo.getEmail());
-//		userVo.setAuthKey(authKey);
-
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("email", userVo.getEmail());
-//		map.put("authKey", userVo.getAuthKey());
-//		System.out.println(map);
-//
-	// DB에 authKey 업데이트
-//		userService.updateAuthKey(map);
-//	}
-
-//	@RequestMapping(value = "/smartooth/app/user/signUp/emailAuth", method = RequestMethod.POST)
-	@RequestMapping("/app/user/signUp/emailAuth")
-	public ModelAndView mailAuth(@RequestParam Map<String, String> map, ModelAndView mv) throws Exception {
-//	public void mailAuth(HttpServletRequest request , ModelAndView mv) {
-
-//		String email = map.get("email");
-//		String email = request.getParameter("email");
-		// 하드코딩
-		String toEmail = "smartooth.system@gmail.com";
-		mailAuthService.sendMail(toEmail);
-		mv.setViewName("/view/index");
-		return mv;
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		String userId = map.get("USER_ID");
+		
+		// Parameter :: userId 값 검증 (Null 체크 및 공백 체크)
+		if(userId == null || userId.equals("")) {
+			//하드코딩
+			userId = "jungjuhyun12@gmail.com";	
+		}
+		
+		try {
+			mailAuthService.sendMail(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			hm.put("result", "error");
+			return hm;
+		}
+		hm.put("result", "success");
+		return hm;
 
 	}
-
-	@RequestMapping("/app/user/signUp/emailConfirm")
+	
+	
+	/**
+	 *메일 URL 클릭시 메일 인증
+	 * */
+	@RequestMapping("/app/user/emailConfirm")
 	public String signUpConfirm(@RequestParam Map<String, String> map, ModelAndView mv) throws Exception {
 
-		// userId(emai)l, authKey 가 일치할경우 AUTH_STATUS 업데이트
-		String userId = map.get("userId");
-		String authKey = map.get("authKey");
+		// userId(email), authKey 가 일치할경우 AUTH_STATUS 업데이트
+		String userId = map.get("USER_ID");
+		String authKey = map.get("AUTH_KEY");
 		String decAuthKey = "";
 		
 		CryptoUtil cryptoUtil = new CryptoUtil();
@@ -87,7 +87,9 @@ public class MailAuthController {
 			mailAuthService.updateAuthStatus(userId);
 		}
 		// AUTH_STATUS의 상태를 변경한 후 로그인 화면으로 redirect
+		// 현재 관리자 화면으로 화면이 전환되는데 이 부분 어떻게 할지 정해야함
 		return "redirect:/";
 	}
+	
 
 }

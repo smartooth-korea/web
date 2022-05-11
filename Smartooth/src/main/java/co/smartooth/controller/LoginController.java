@@ -37,7 +37,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/")
 	public String selectUserInfo() {
-		return "st/login/loginForm";
+		return "login/loginForm";
 	}
 	
 	//	 관리자 웹 로그인
@@ -50,7 +50,7 @@ public class LoginController {
 //            loginVO.setRememberId(true);
 //        }
 		System.out.println("login.do");
-		return "redirect:/st/main.do";
+		return "redirect:/main.do";
 	}
 	
 	

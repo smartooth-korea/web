@@ -13,11 +13,35 @@ public class UserServiceimpl implements UserService{
 	@Autowired(required = false)
 	UserMapper userMapper;
 
+	// 사용자 등록 (회원가입)
 	@Override
-	public List<UserVO> selectUserList() throws Exception {
-			return userMapper.selectUserList();
+	public void insertUser(UserVO userVo) throws Exception {
+		userMapper.insertUser(userVo);
+	}
+	
+	// 사용자 정보 업데이트 (회원가입)
+	@Override
+	public void updateUser(UserVO userVo) throws Exception {
+		userMapper.updateUser(userVo);
+	}
+	
+	// 사용자 번호 (회원 번호 생성 전 SEQ_NO) 조회
+	@Override
+	public int selectUserSeqNo() throws Exception {
+		return userMapper.selectUserSeqNo();
+	}
+	
+	// 사용자 번호 (회원 번호 생성 후 SEQ_NO) 업데이트 
+	@Override
+	public void updateUserSeqNo(int seqNo) throws Exception {
+		userMapper.updateUserSeqNo(seqNo);
+	}
+	
+	// 사용자 목록 조회
+	@Override
+	public List<UserVO> selectUserList(String userId) throws Exception {
+		return userMapper.selectUserList();
 	}
 
-	
 	
 }

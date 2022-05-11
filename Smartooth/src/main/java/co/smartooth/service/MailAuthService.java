@@ -13,6 +13,9 @@ public interface MailAuthService {
 	// 메일 발송
 	public void sendMail(String userId) throws Exception;
 	
+	// UserId로 메일 인증키 발행 후 Database 에 입력
+	void insertAuthKeyById(MailAuthVO mailAuthVO) throws Exception;
+
 	// 메일 인증키 업데이트
 	public void updateAuthKeyById(MailAuthVO mailAuthVO) throws Exception;
 	
@@ -21,6 +24,7 @@ public interface MailAuthService {
 	
 	// 사용자 존재 여부 확인 (유효성 검사)
 	public boolean isValidation(MailAuthVO mailAuthVO) throws Exception;
+
 
 
 

@@ -95,8 +95,10 @@ public void sendMail(String userId) {
 		mailAuthVO.setAuthKey(authKey);
 		
 		// 이메일 발송 전 authKey를 Database에 UPDATE
+		// 만약 ID가 존재하지 않는 유저라면 
 		// 기준은 이메일(아이디)
 		try {
+			insertAuthKeyById(mailAuthVO);
 			updateAuthKeyById(mailAuthVO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,9 +147,9 @@ public void sendMail(String userId) {
 			.append("								&nbsp;&nbsp;")
 			.append("							<a href='http://")
 			.append(serverInfo)
-			.append("/app/user/signUp/emailConfirm?userId=")
+			.append("/app/user/emailConfirm?USER_ID=")
 			.append(userId)
-			.append("&authKey=")
+			.append("&AUTH_KEY=")
 			.append(encAuthKey)
 			.append("&target='_blenk'>이메일 인증 확인</a>")
 			.append("						</div>")
@@ -181,6 +183,15 @@ public void sendMail(String userId) {
 		}
 	}
 
+	
+	@Override
+	public void insertAuthKeyById(MailAuthVO mailAuthVO) throws Exception {
+		try {
+			mailAuthMapper.insertAuthKeyByUserId(mailAuthVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void updateAuthKeyById(MailAuthVO mailAuthVO) throws Exception {

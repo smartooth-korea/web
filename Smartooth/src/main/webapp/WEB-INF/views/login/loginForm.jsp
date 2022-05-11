@@ -9,8 +9,7 @@
 <meta name="author" content="㈜스마트코리아" />
 <meta name="description" content="Smartooth" />
 <title>Smartooth 관리자 페이지 :: 로그인</title>
-
-<!-- Favicon -->
+<link rel="shortcut icon" href="#"><!-- favicon ico 에러 -->
 <link href="/css/common/sub.css" rel="stylesheet" type="text/css" />
 <link href="/css/login.css" rel="stylesheet" type="text/css" />
 </head>

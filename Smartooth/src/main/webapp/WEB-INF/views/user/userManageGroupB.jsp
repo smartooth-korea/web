@@ -9,19 +9,14 @@
 <meta name="author" content="㈜스마트코리아" />
 <meta name="description" content="Smartooth" />
 <title>Smartooth 관리자 페이지</title>
-<!-- 						 '/Smartooth/src/main/webapp/WEB-INF/views/st/main.jsp' -->
-<%-- <jsp:include page="/Smartooth/src/main/webapp/WEB-INF/views/st/layout/leftMenu.jsp"/> --%>
-<%@include file = "/WEB-INF/views/st/layout/menu/left.jsp"%>
-<%@include file = "/WEB-INF/views/st/layout/menu/top.jsp"%>
-<%-- <jsp:include page="/WEB-INF/views/st/layout/menu/left.jsp"/> --%>
-<%-- <jsp:include page="/WEB-INF/views/st/layout/menu/top.jsp"/> --%>
-
+<link rel="shortcut icon" href="#"><!-- favicon ico 에러 -->
 <link href="/css/common/sub.css" rel="stylesheet" type="text/css" />
-<link href="/css/common/main.css" rel="stylesheet" type="text/css" />
+<link href="/css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 // 	$(document).ready(function() {
 // 		var smartoothId = GetCookie("smartoothId");
 // 		alert("smartoothId >>> "+ smartoothId);
@@ -120,15 +115,23 @@
 // 		}
 // 	});
 </script>
-<body class="body">
-	<form id="frm" name="frm" method="post" action="/login.do">
-		<div class="commonHeight120"></div>
-		123123123123123123
-		</div>
-	</form>
+<body>
+<%-- 	<%@include file = "/WEB-INF/views/layout/left.jsp"%> --%>
+<%-- 	<%@include file = "/WEB-INF/views/layout/header.jsp"%> --%>
+	
+	<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/layout/left.jsp"></jsp:include>
+	<div style="height: 50px;"></div>
+	<div style="position: relative; left: 365px; height: 50px; font-size: 28px; font-weight: bold;">
+		${categoriesName}
+	</div>
+	<div>
+		<hr style="border: solid 1px #3F3F3F; width: 67.6%; position: absolute; left: 365px;">
+	</div>
+	<div style="left: 365px;position: absolute;top: 223px;">
+		<img alt="" src="/imgs/user/user-table-groupB.png">
+	</div>
 </body>
-
-
 </html>
 
 

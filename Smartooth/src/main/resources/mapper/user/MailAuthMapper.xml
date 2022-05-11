@@ -3,6 +3,54 @@
 <mapper namespace="co.smartooth.mapper.MailAuthMapper">
     <cache />
 
+	<!-- 사용자의 생성 및 메일 인증번호(authkey) 생성-->
+	<insert id="insertAuthKeyByUserId" parameterType="co.smartooth.vo.MailAuthVO">
+       INSERT INTO ST_USER
+            (
+	             USER_ID,
+	             USER_NM,
+	             USER_PWD,
+	             USER_NICKNAME,
+	             USER_BIRTHDAY,
+	             USER_COUNTRY,
+	             USER_STATE,
+	             USER_ADDRESS,
+	             USER_TEL_NO,
+	             USER_SEX,
+	             USER_RGST_DT,
+	             USER_PUSH_TOKEN,
+	             USER_DELETE_YN,
+	             USER_DELETE_DT,
+	             USER_EMAIL_YN,
+	             AUTH_KEY,
+	             AUTH_STATUS,
+	             LOGIN_CK,
+	             LOGIN_DT
+             )
+		VALUES
+			(
+				#{userId},
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+	            NULL,
+				SYSDATE(),
+	            NULL,
+	            'N',
+	            NULL,
+	            'N',
+	            #{authKey},
+	            'N',
+	            0,
+	            NULL); 
+    </insert>
+    
+    
 	<!-- 사용자의 인증키(authkey) 값 업데이트 -->
 	<update id="updateAuthKeyByUserId" parameterType="co.smartooth.vo.MailAuthVO">
        UPDATE ST_USER

@@ -9,14 +9,19 @@ public class UserVO {
 	private String userNm;
 	private String userPwd;
 	private String userNickname;
-	private String birthday;
-	private String sex;
-	private String email;
-	private String emaiYn;
-	private String telNum;
-	private Date rgstDt;
-	private String deleteYn;
-	private Date deleteDt;
+	private Date userBirthday;
+	private String userCountry;
+	private String userState;
+	private String userTelNo;
+	private String userAddress;
+	private String userSex;
+	private Date userRgstDt;
+	private String userPushToken;
+	private String userDeleteYn;
+	private Date userDeleteDt;
+	private String userEmailYn;
+	private String userAuthKey;
+	private String userAuthStatus;
 	private Date loginDt;
 	private int loginCk;
 	
@@ -51,60 +56,90 @@ public class UserVO {
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
-	public String getBirthday() {
-		return birthday;
+	public Date getUserBirthday() {
+		return userBirthday;
 	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setUserBirthday(Date userBirthday) {
+		this.userBirthday = userBirthday;
 	}
-	public String getSex() {
-		return sex;
+	public String getUserCountry() {
+		return userCountry;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setUserCountry(String userCountry) {
+		this.userCountry = userCountry;
 	}
-	public String getEmail() {
-		return email;
+	public String getUserState() {
+		return userState;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserState(String userState) {
+		this.userState = userState;
 	}
-	public String getEmaiYn() {
-		return emaiYn;
+	public String getUserTelNo() {
+		return userTelNo;
 	}
-	public void setEmaiYn(String emaiYn) {
-		this.emaiYn = emaiYn;
+	public void setUserTelNo(String userTelNo) {
+		this.userTelNo = userTelNo;
 	}
-	public String getTelNum() {
-		return telNum;
+	public String getUserAddress() {
+		return userAddress;
 	}
-	public void setTelNum(String telNum) {
-		this.telNum = telNum;
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
-	public Date getRgstDt() {
-		return rgstDt;
+	public String getUserSex() {
+		return userSex;
 	}
-	public void setRgstDt(Date rgstDt) {
-		this.rgstDt = rgstDt;
+	public void setUserSex(String userSex) {
+		this.userSex = userSex;
 	}
-	public String getDeleteYn() {
-		return deleteYn;
+	public Date getUserRgstDt() {
+		return userRgstDt;
 	}
-	public void setDeleteYn(String deleteYn) {
-		this.deleteYn = deleteYn;
+	public void setUserRgstDt(Date userRgstDt) {
+		this.userRgstDt = userRgstDt;
 	}
-	public Date getDeleteDt() {
-		return deleteDt;
+	public String getUserPushToken() {
+		return userPushToken;
 	}
-	public void setDeleteDt(Date deleteDt) {
-		this.deleteDt = deleteDt;
+	public void setUserPushToken(String userPushToken) {
+		this.userPushToken = userPushToken;
+	}
+	public String getUserDeleteYn() {
+		return userDeleteYn;
+	}
+	public void setUserDeleteYn(String userDeleteYn) {
+		this.userDeleteYn = userDeleteYn;
+	}
+	public Date getUserDeleteDt() {
+		return userDeleteDt;
+	}
+	public void setUserDeleteDt(Date userDeleteDt) {
+		this.userDeleteDt = userDeleteDt;
+	}
+	public String getUserEmailYn() {
+		return userEmailYn;
+	}
+	public void setUserEmailYn(String userEmailYn) {
+		this.userEmailYn = userEmailYn;
+	}
+	public String getUserAuthKey() {
+		return userAuthKey;
+	}
+	public void setUserAuthKey(String userAuthKey) {
+		this.userAuthKey = userAuthKey;
+	}
+	public String getUserAuthStatus() {
+		return userAuthStatus;
+	}
+	public void setUserAuthStatus(String userAuthStatus) {
+		this.userAuthStatus = userAuthStatus;
 	}
 	public Date getLoginDt() {
 		return loginDt;
 	}
 	public void setLoginDt(Date loginDt) {
 		this.loginDt = loginDt;
-	}
+	}	
 	public int getLoginCk() {
 		return loginCk;
 	}

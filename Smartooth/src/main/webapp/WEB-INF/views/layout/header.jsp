@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">
-
-	body{
-		margin:0px;
-	}
 	#top-nav-top{
-		background-image: url('/imgs/layout/top/background.png');
+		background-image: url('/imgs/layout/header/background.png');
 		width: 100%;
 		height: 100px;
 		position: relative;
@@ -14,7 +10,7 @@
 	
 	#top-nav-bottom{
 		position: fixed;
-		top: 73px;
+		top: 75px;
 		left: 65px;
 		color: #000000;
 	}
@@ -74,14 +70,15 @@
 				onSearch();
 			}
 		});
-	});	
+	});
+	
 </script>
 <div id="top-nav-top" class="top-nav-top">
 	<img alt="" src="/imgs/layout/menu/logo/smartooth.png" onclick="location.href='#'">
 </div>
 <div>
 	<div id="top-nav-bottom" style="float: left;">
-		대시보드  /  사용자 관리  /  개인
+		${headerCategoriesName}
 	</div>
 	<!-- common.js 에 기능 구현 -->
 	<span class="searc_icon">
