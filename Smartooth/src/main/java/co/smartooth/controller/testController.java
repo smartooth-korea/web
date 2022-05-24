@@ -31,4 +31,10 @@ public class testController {
 		return "login";
 	}
 	
+	
+	@RequestMapping(value = {"/device"})
+	public String device() {
+		return "deviceInfo";
+	}
+	
 }

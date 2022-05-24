@@ -3,54 +3,28 @@
 <mapper namespace="co.smartooth.mapper.DeviceMapper">
 
 
-	<!-- 회원 아이디와 비밀번호로 존재 여부 확인 :: true = 1, false = 0 -->
-    <select id="loginChkByIdPwd" parameterType="co.smartooth.vo.LoginVO" resultType="Integer">
-        SELECT COUNT(*)
-          FROM ST_USER
-		 WHERE 1=1
-		     AND USER_ID = #{userId}
-		     AND USER_PWD = #{userPwd}
-    </select>
-
-
-	<!-- 	회원 아이디가 존재하는지 여부 확인 :: true = 1, false = 0 -->
-    <select id="isIdExist" parameterType="String" resultType="Integer">
-        SELECT COUNT(*)
-          FROM ST_USER
-		 WHERE 1=1
-		     AND USER_ID = #{userId}
-    </select>
-
-
-	<!-- 	회원 : 로그인 처리가 정상적으로 완료될 경우, USER_AUTH_TOKEN을 UPDATE -->
-    <update id="updateUserAuthToken" parameterType="co.smartooth.vo.LoginVO">
-        UPDATE ST_USER
-  			 SET  USER_AUTH_TOKEN = #{userAuthToken}
-	     WHERE  1=1
-	     AND USER_ID = #{userId}
-    </update>
-    
-    
-    <!-- 회원 : 로그인 완료 후 로그인 LOG를 기록-->
-	<insert id="insertUserLoginHistory" parameterType="co.smartooth.vo.LoginVO">
-		INSERT INTO ST_USER_LOGIN_HIST
-			(	
+    <!-- 회원 장비 정보 입력 -->
+	<insert id="insertDeviceInfo" parameterType="co.smartooth.vo.DeviceVO">
+		INSERT INTO ST_DEVICE_INFO
+			(
 				USER_NO
 				,USER_ID
-				,USER_TYPE
-				,LOGIN_DT
-				,LOGIN_RESULT_CODE
-				,LOGIN_IP
-			)
+				,DEVICE_NM
+				,DEVICE_CODE
+				,SERIAL_NO
+				,MAC_ADDRESS
+				,RGST_DT
+            )
 		VALUES
 			(
 				#{userNo}
-				,#{userId}
-				,#{userType}
-				,SYSDATE()
-				,#{loginResultCode}
-				,#{loginIp}
-			)
+            	,#{userId}
+            	,#{deviceNm}
+            	,#{deviceCode}
+            	,#{serialNo}
+            	,#{macAddress}
+            	,SYSDATE()
+           	) 
 	</insert>
     
     

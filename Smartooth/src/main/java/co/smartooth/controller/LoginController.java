@@ -92,10 +92,14 @@ public class LoginController {
 	public HashMap<String,Object> appLogin(@RequestBody HashMap<String, Object> paramMap) {
        
 		TokenUtil tokenUtil = new TokenUtil();
+		
 		HashMap<String,Object> hm = new HashMap<String,Object>();
+		
 		List<UserVO> data = new ArrayList<UserVO>();
+		
 		LoginVO loginVO = new LoginVO();
 		UserVO userVO = new UserVO();
+		
 		String userPwd = "";
 		String userId = "";
 		String userAuthToken = "";
@@ -135,10 +139,10 @@ public class LoginController {
 			if(loginChkByIdPwd == 0){ // 0일 경우는 Database에 ID와 비밀번호가 틀린 것
 				isIdExist = loginService.isIdExist(loginVO.getUserId());
 				if(isIdExist == 0) {
-					hm.put("code", "400");
+					hm.put("code", "404");
 					hm.put("msg", "존재하지 않는 아이디 입니다.");
 				}else {
-					hm.put("code", "400");
+					hm.put("code", "405");
 					hm.put("msg", "비밀번호가 틀렸습니다.");
 				}
 			}else { // 로그인이 정상적으로 완료된 경우 회원의 정보를 제공하고 LOG를 INSERT
@@ -160,6 +164,7 @@ public class LoginController {
 				
 				hm.put("data", data);
 				hm.put("USER_AUTH_TOKEN", userAuthToken);
+				hm.put("USER_NO", data.get(0).getUserNo());
 				hm.put("code", "000");
 				hm.put("msg", "로그인 성공");
 			}

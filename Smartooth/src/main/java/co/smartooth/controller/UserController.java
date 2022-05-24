@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import co.smartooth.service.DeviceService;
 import co.smartooth.service.UserService;
 import co.smartooth.utils.AES256Util;
+import co.smartooth.vo.DeviceVO;
 import co.smartooth.vo.UserVO;
 
 
@@ -32,6 +35,9 @@ public class UserController {
 	
 	@Autowired(required = false)
 	private UserService userService;
+	
+	@Autowired(required = false)
+	private DeviceService deviceService;
 	
 	
 	/**
@@ -420,6 +426,41 @@ public class UserController {
 	}
 	
 	
+	
+	
+	/**
+	 * 기능   : 회원의 장비 정보를 INSERT
+	 * 작성자 : 정주현 
+	 * 작성일 : 2022. 5. 19
+	 * parameter : HashMap<String,Object>
+	 * return : HashMap<String,Object>
+	 * @throws UnsupportedEncodingException 
+	 */
+	@RequestMapping(value = {"/app/user/insertDeviceInfo.do"}, method = {RequestMethod.POST})
+	@ResponseBody
+	public HashMap<String,Object> insertDeviceInfo(@RequestBody HashMap<String, Object> paramMap) throws Exception {
+		
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		
+		DeviceVO deviceVO = new DeviceVO();
+		deviceVO.setUserId((String)paramMap.get("USER_ID"));
+		deviceVO.setUserNo((String)paramMap.get("USER_NO"));
+		deviceVO.setDeviceNm((String)paramMap.get("DEVICE_NM"));
+		deviceVO.setDeviceCode((String)paramMap.get("DEVICE_CODE"));
+		deviceVO.setSerialNo((String)paramMap.get("SERIAL_NO"));
+		deviceVO.setMacAddress((String)paramMap.get("MAC_ADDRESS"));
+		
+		try {
+			deviceService.insertDeviceInfo(deviceVO);
+			hm.put("code", "000");
+			hm.put("msg", "등록 성공");
+		} catch (Exception e) {
+			hm.put("code", "500");
+			hm.put("msg", "서버 오류");
+			e.printStackTrace();
+		}
+		return hm;
+	}
 	
 	
 	

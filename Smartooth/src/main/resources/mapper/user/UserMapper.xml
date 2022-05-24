@@ -275,17 +275,17 @@
     
     
     
-<!--		아이디 중복 체크 -->
-<!--		<select id="selectTeethMeasureValueByDate" resultType="Integer" parameterType="Hashmap"> -->
-<!--			SELECT COUNT(*) -->
-<!--			  FROM ST_TEETH_MEASURE -->
-<!--		 	 WHERE 1=1 -->
-<!--				 AND USER_ID = #{USER_ID} -->
-<!--			<if test="USER_NO != null and USER_NO != '' "> -->
-<!--				AND USER_NO = #{USER_NO} -->
-<!--			</if> -->
-<!--				AND DATE(MEASURE_DT) = #{MEASURE_DT} -->
-<!--     	</select> -->
+		<!--		아이디 중복 체크 -->
+		<select id="selectTeethMeasureValueByDate" resultType="Integer" parameterType="Hashmap">
+			SELECT COUNT(*)
+			  FROM ST_TEETH_MEASURE
+		 	 WHERE 1=1
+				 AND USER_ID = #{USER_ID}
+			<if test="USER_NO != null and USER_NO != '' ">
+				AND USER_NO = #{USER_NO}
+			</if>
+				AND DATE(MEASURE_DT) = #{MEASURE_DT}
+    	</select>
     
     
 
