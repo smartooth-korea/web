@@ -6,6 +6,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class CryptoUtil {
 	
+//	IOS url-encode로 인해 '+'가 공백으로 바뀌는 증상 대응코드
+//	AES128 : 키값 16bytes
+//	AES192 : 키값 24bytes
+//	AES256 : 키값 32bytes
+	
 	public static final String PASSWD_SALT = "d9976d879b0ddde5f9cb7d76b24cc9a1";
 	public static final String PASSWORD_IV = "af9aa276320bc35e22c4497ea49c2568";
 	public static final int PASSWD_ITERATION = 1000;
@@ -13,7 +18,7 @@ public class CryptoUtil {
 	
 	
 	public static String algorithm = "AES/CBC/PKCS5Padding";
-	private static String key = "smartooth01234567890123456789012";
+	private static String key = "smartoothkoreaco";
 	private final String iv = key.substring(0, 16);
 	
 	public String encrypt(String text) throws Exception{
@@ -29,17 +34,27 @@ public class CryptoUtil {
 		
 	}
 	
-	public String decrypt(String cipherText) throws Exception{
+	public String decrypt(String cipherText){
 		
-		Cipher cipher = Cipher.getInstance(algorithm);
-		SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
-		IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
-		cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParamSpec);
+		Cipher cipher = null;
+		byte[] decodedBytes = null;
+		byte[] decrypted = null;
+
+		try {
+			cipher = Cipher.getInstance(algorithm);
+			SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
+			IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+			cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParamSpec);
 		
-		byte[] decodedBytes = java.util.Base64.getDecoder().decode(cipherText);
-		byte[] decrypted = cipher.doFinal(decodedBytes);
+			decodedBytes = java.util.Base64.getDecoder().decode(cipherText);
+			decrypted = cipher.doFinal(decodedBytes);
+			return new String(decrypted, "UTF-8");
 		
-		return new String(decrypted, "UTF-8");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "false"; 
+		}
 		
 	}
 }

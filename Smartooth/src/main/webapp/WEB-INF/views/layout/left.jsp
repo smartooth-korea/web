@@ -73,7 +73,7 @@
 	display: none;
 }
 
-/*사용자관리 - 개인(파란색으로 변하게하는 부분)*/
+/*회원관리 - 개인(파란색으로 변하게하는 부분)*/
 /* .left-side-bar .menu .div-menu-depth1 .div-menu-depth2 a:hover{ */
 /* 	padding-left: 70px; */
 /* 	color: #FFFFFF; */

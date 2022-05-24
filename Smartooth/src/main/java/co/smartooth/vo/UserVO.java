@@ -1,29 +1,31 @@
 package co.smartooth.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserVO {
+public class UserVO implements Serializable {
 	
 	private String userNo;
 	private String userId;
 	private String userNm;
 	private String userPwd;
 	private String userNickname;
+	private String userType;
 	private Date userBirthday;
 	private String userCountry;
 	private String userState;
-	private String userTelNo;
 	private String userAddress;
+	private String userTelNo;
 	private String userSex;
 	private Date userRgstDt;
-	private String userPushToken;
+	private String pushToken;
 	private String userDeleteYn;
 	private Date userDeleteDt;
-	private String userEmailYn;
-	private String userAuthKey;
-	private String userAuthStatus;
 	private Date loginDt;
+	private String userAuthToken;
+	private String userEmailYn;
 	private int loginCk;
+	private String macAddress;
 	
 	
 	public String getUserNo() {
@@ -49,6 +51,12 @@ public class UserVO {
 	}
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	public String getUserNickname() {
 		return userNickname;
@@ -98,11 +106,11 @@ public class UserVO {
 	public void setUserRgstDt(Date userRgstDt) {
 		this.userRgstDt = userRgstDt;
 	}
-	public String getUserPushToken() {
-		return userPushToken;
+	public String getPushToken() {
+		return pushToken;
 	}
-	public void setUserPushToken(String userPushToken) {
-		this.userPushToken = userPushToken;
+	public void setPushToken(String pushToken) {
+		this.pushToken = pushToken;
 	}
 	public String getUserDeleteYn() {
 		return userDeleteYn;
@@ -122,18 +130,18 @@ public class UserVO {
 	public void setUserEmailYn(String userEmailYn) {
 		this.userEmailYn = userEmailYn;
 	}
-	public String getUserAuthKey() {
-		return userAuthKey;
-	}
-	public void setUserAuthKey(String userAuthKey) {
-		this.userAuthKey = userAuthKey;
-	}
-	public String getUserAuthStatus() {
-		return userAuthStatus;
-	}
-	public void setUserAuthStatus(String userAuthStatus) {
-		this.userAuthStatus = userAuthStatus;
-	}
+//	public String getUserAuthKey() {
+//		return userAuthKey;
+//	}
+//	public void setUserAuthKey(String userAuthKey) {
+//		this.userAuthKey = userAuthKey;
+//	}
+//	public String getUserAuthStatus() {
+//		return userAuthStatus;
+//	}
+//	public void setUserAuthStatus(String userAuthStatus) {
+//		this.userAuthStatus = userAuthStatus;
+//	}
 	public Date getLoginDt() {
 		return loginDt;
 	}
@@ -145,5 +153,11 @@ public class UserVO {
 	}
 	public void setLoginCk(int loginCk) {
 		this.loginCk = loginCk;
+	}
+	public String getUserAuthToken() {
+		return userAuthToken;
+	}
+	public void setUserAuthToken(String userAuthToken) {
+		this.userAuthToken = userAuthToken;
 	}
 }

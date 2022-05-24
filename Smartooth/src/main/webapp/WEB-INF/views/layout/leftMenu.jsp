@@ -68,7 +68,7 @@
     line-height: 40px;
     font-size: 18px;
 }
-/*사용자관리 - 개인(파란색으로 변하게하는 부분)*/
+/*회원관리 - 개인(파란색으로 변하게하는 부분)*/
 .side-bar .menu .item .sub-menu a:hover{
 	padding-left: 70px;
 	color: #FFFFFF;

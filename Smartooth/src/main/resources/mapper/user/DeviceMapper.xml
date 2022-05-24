@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.smartooth.mapper.LoginMapper">
+<mapper namespace="co.smartooth.mapper.DeviceMapper">
 
 
 	<!-- 회원 아이디와 비밀번호로 존재 여부 확인 :: true = 1, false = 0 -->
