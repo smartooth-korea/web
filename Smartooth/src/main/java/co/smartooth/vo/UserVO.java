@@ -1,33 +1,40 @@
 package co.smartooth.vo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class UserVO implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	private int seqNo;
 	private String userNo;
 	private String userId;
 	private String userNm;
 	private String userPwd;
 	private String userNickname;
 	private String userType;
-	private Date userBirthday;
+	private String userBirthday;
 	private String userCountry;
 	private String userState;
 	private String userAddress;
 	private String userTelNo;
 	private String userSex;
-	private Date userRgstDt;
+	private String userRgstDt;
 	private String pushToken;
 	private String userDeleteYn;
-	private Date userDeleteDt;
-	private Date loginDt;
-	private String userAuthToken;
+	private String userDeleteDt;
+	private String loginDt;
 	private String userEmailYn;
+	private String userAuthToken;
 	private int loginCk;
-	private String macAddress;
+
 	
-	
+	public int getSeqNo() {
+		return seqNo;
+	}
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
 	public String getUserNo() {
 		return userNo;
 	}
@@ -64,10 +71,10 @@ public class UserVO implements Serializable {
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
 	}
-	public Date getUserBirthday() {
+	public String getUserBirthday() {
 		return userBirthday;
 	}
-	public void setUserBirthday(Date userBirthday) {
+	public void setUserBirthday(String userBirthday) {
 		this.userBirthday = userBirthday;
 	}
 	public String getUserCountry() {
@@ -100,10 +107,10 @@ public class UserVO implements Serializable {
 	public void setUserSex(String userSex) {
 		this.userSex = userSex;
 	}
-	public Date getUserRgstDt() {
+	public String getUserRgstDt() {
 		return userRgstDt;
 	}
-	public void setUserRgstDt(Date userRgstDt) {
+	public void setUserRgstDt(String userRgstDt) {
 		this.userRgstDt = userRgstDt;
 	}
 	public String getPushToken() {
@@ -118,10 +125,10 @@ public class UserVO implements Serializable {
 	public void setUserDeleteYn(String userDeleteYn) {
 		this.userDeleteYn = userDeleteYn;
 	}
-	public Date getUserDeleteDt() {
+	public String getUserDeleteDt() {
 		return userDeleteDt;
 	}
-	public void setUserDeleteDt(Date userDeleteDt) {
+	public void setUserDeleteDt(String userDeleteDt) {
 		this.userDeleteDt = userDeleteDt;
 	}
 	public String getUserEmailYn() {
@@ -130,22 +137,10 @@ public class UserVO implements Serializable {
 	public void setUserEmailYn(String userEmailYn) {
 		this.userEmailYn = userEmailYn;
 	}
-//	public String getUserAuthKey() {
-//		return userAuthKey;
-//	}
-//	public void setUserAuthKey(String userAuthKey) {
-//		this.userAuthKey = userAuthKey;
-//	}
-//	public String getUserAuthStatus() {
-//		return userAuthStatus;
-//	}
-//	public void setUserAuthStatus(String userAuthStatus) {
-//		this.userAuthStatus = userAuthStatus;
-//	}
-	public Date getLoginDt() {
+	public String getLoginDt() {
 		return loginDt;
 	}
-	public void setLoginDt(Date loginDt) {
+	public void setLoginDt(String loginDt) {
 		this.loginDt = loginDt;
 	}	
 	public int getLoginCk() {

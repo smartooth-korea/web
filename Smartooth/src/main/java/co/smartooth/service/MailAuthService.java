@@ -13,6 +13,8 @@ public interface MailAuthService {
 	 */
 	// 메일 발송
 	public void sendMail(String userId) throws Exception;
+
+	public void sendResetPasswordMail(String userId, String emailAuthKey) throws Exception;
 	
 	// UserId로 메일 인증 번호 발행 후 Database 에 입력
 	void insertAuthKeyById(MailAuthVO mailAuthVO) throws Exception;

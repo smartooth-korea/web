@@ -11,23 +11,14 @@
 
 $(document).ready(function(){
 	
-	//[요청 json 데이터 선언] ::: 치아 측정
-// 	var jsonData = { 
-// 		"USER_ID" : "jungjuhyun12@gmail.com"
-// 	};
-	
-	
-	
 	$('#submit').click(function(){ 
 		$.ajax({
 			type:'POST',   //post 방식으로 전송
-// 			url:'/app/user/signUp/emailAuth.do',   //데이터를 주고받을 파일 주소
 			url:'/app/login.do',   //데이터를 주고받을 파일 주소
 			data:JSON.stringify ({
-				"USER_ID" : "jungjuhyun12@gmail.com"
-				,"USER_PWD" : "1234"
-				,"USER_AUTH_TOKEN" : "U2FiaW5h"
-				,"LOGIN_IP" : "192.168.0.1"
+				"userId" : "test00@test00.com"
+				,"userPwd" : "1234"
+				,"loginIp" : "192.168.0.1"
 			}),   //위의 변수에 담긴 데이터를 전송해준다.
 			dataType:'JSON',   //json 파일 형식으로 값을 담아온다.
 			contentType : "application/json; charset=UTF-8",

@@ -20,9 +20,9 @@ public class testController {
 		return "register";
 	}
 
-	@RequestMapping(value = {"/mailAuth"})
-	public String mailAuth() {
-		return "mail";
+	@RequestMapping(value = {"/emailAuth"})
+	public String emailAuth() {
+		return "emailAuth";
 	}
 	
 	
@@ -37,4 +37,38 @@ public class testController {
 		return "deviceInfo";
 	}
 	
+	@RequestMapping(value = {"/selectUserInfo"})
+	public String selectUserInfo() {
+		return "selectUserInfo";
+	}
+
+	@RequestMapping(value = {"/selectUserTeethInfo"})
+	public String teethInfo() {
+		return "selectUserTeethInfo";
+	}
+	
+	@RequestMapping(value = {"/teethMeasureValue"})
+	public String teethMeasureValue() {
+		return "teethMeasureValue";
+	}
+
+	@RequestMapping(value = {"/selectUserToothMeasureValue"})
+	public String selectUserToothMeasureValue() {
+		return "selectUserToothMeasureValue";
+	}
+	
+	@RequestMapping(value = {"/deleteUser"})
+	public String deleteUser() {
+		return "deleteUser";
+	}
+	
+	@RequestMapping(value = {"/insertCalibrationInfoValue"})
+	public String insertCalibrationInfo() {
+		return "insertCalibrationInfoValue";
+	}
+	
+	@RequestMapping(value = {"/findUserPwd"})
+	public String findUserPwd() {
+		return "findUserPwd";
+	}
 }

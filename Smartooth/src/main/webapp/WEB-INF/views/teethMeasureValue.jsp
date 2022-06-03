@@ -10,25 +10,24 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-
+	
+	//[요청 json 데이터 선언] ::: 치아 측정
+// 	var jsonData = { 
+// 		"USER_ID" : "jungjuhyun12@gmail.com"
+// 	};
+	
+	
+	
 	$('#submit').click(function(){ 
 		$.ajax({
 			type:'POST',   //post 방식으로 전송
-			url:'/app/user/register.do',   //데이터를 주고받을 파일 주소
+			url:'/app/user/selectUserMeasureValue.do',   //데이터를 주고받을 파일 주소
 			data:JSON.stringify ({
-				"userId" : "test"
-				,"userPwd" : "1234"
-				,"userNm" : "관리자"
-				,"userNickname" : "관리자"
-				,"userType" : "G"
-				,"userBirthday" : "2019-01-09"
-				,"userCountry" : "KR"
-				,"userState" : ""
-				,"userAddress" : "청화대"
-				,"userTelNo" : "010-0000-0000"
-				,"userSex" : "M"
-				,"pushToken" : "P.U.S.H.T.O.K.E.N"
-				,"teethStatus" : "200|100|100|100|100|100|100|100|100|100|100|100|100|100|100|200|100|100|100|100|100|100|100|100|100|100|100|100|100|100|100|100"
+				"userId" : "lcblue@naver.com"
+				,"userNo" : "KR-I-0007"
+				,"userAuthToken" : " "
+				,"startDt" : "2022-02-30"
+				,"endDt" : "2022-05-17"
 			}),   //위의 변수에 담긴 데이터를 전송해준다.
 			dataType:'JSON',   //json 파일 형식으로 값을 담아온다.
 			contentType : "application/json; charset=UTF-8",
@@ -37,20 +36,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-
-
 });
-
-
-
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1425013891296132&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Meta Pixel Code -->
-
 </script>
 <body>
-	<input type="button" id="submit" value="버튼"/>
+		<input type="button" id="submit" value="버튼"/>
 </body>
 </html>

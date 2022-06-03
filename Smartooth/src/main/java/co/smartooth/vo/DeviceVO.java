@@ -1,6 +1,5 @@
 package co.smartooth.vo;
 
-import java.util.Date;
 
 public class DeviceVO {
 	
@@ -10,7 +9,7 @@ public class DeviceVO {
 	private String deviceCode;
 	private String serialNo;
 	private String macAddress;
-	private Date rgstDt;
+	private String rgstDt;
 	
 	
 	public String getUserNo() {
@@ -49,10 +48,10 @@ public class DeviceVO {
 	public void setMacAddress(String macAddress) {
 		this.macAddress = macAddress;
 	}
-	public Date getRgstDt() {
+	public String getRgstDt() {
 		return rgstDt;
 	}
-	public void setRgstDt(Date rgstDt) {
+	public void setRgstDt(String rgstDt) {
 		this.rgstDt = rgstDt;
 	}
 	

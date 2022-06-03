@@ -8,20 +8,21 @@
 </head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
-	
-	//[요청 json 데이터 선언] ::: 치아 측정
-// 	var jsonData = { 
-// 		"USER_ID" : "jungjuhyun12@gmail.com"
-// 	};
 	
 	$('#submit').click(function(){ 
 		$.ajax({
 			type:'POST',   //post 방식으로 전송
-// 			url:'/app/user/signUp/emailAuth.do',   //데이터를 주고받을 파일 주소
-			url:'/app/user/signUp/emailAuthChk.do',   //데이터를 주고받을 파일 주소
+			url:'/app/user/insertCalibrationInfo.do',   //데이터를 주고받을 파일 주소
 			data:JSON.stringify ({
-				"USER_ID" : "jungjuhyun55@naver.com"
+				"userId" : "test01@test01.com"
+				,"userNo" : "KR-I-0001"
+				,"calibrationAir" : "888"
+				,"calibrationKit" : "1888"
+				,"calibrationRef" : "88"
+				,"macAddress" : "00000000-F176-4231-D4DC-43BABC8A7357"
+// 				,"macAddress" : "85972872-F176-4231-D4DC-43BABC8A7357"
 			}),   //위의 변수에 담긴 데이터를 전송해준다.
 			dataType:'JSON',   //json 파일 형식으로 값을 담아온다.
 			contentType : "application/json; charset=UTF-8",
@@ -33,10 +34,6 @@ $(document).ready(function(){
 });
 </script>
 <body>
-<!-- 	<form id="frm" name="frm" action="/app/user/login.do" method="post"> -->
-<!-- 	<form id="frm" name="frm" action="/app/user/signUp/emailAuth.do" method="post"> -->
-<!-- 		<input type="text" id="USER_ID" name="USER_ID" value="jungjuhyun12@gmail.com"/>  -->
 		<input type="button" id="submit" value="버튼"/>
-<!-- 	</form> -->
 </body>
 </html>

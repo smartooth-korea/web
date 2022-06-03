@@ -2,16 +2,16 @@ package co.smartooth.vo;
 
 import java.util.Date;
 
-public class LoginVO {
+public class AuthVO {
 	
 	private String userNo;
 	private String userId;
 	private String userPwd;
+
 	private String userType;
-	private Date loginDt;
+	private String loginDt;
 	private String loginResultCode;
 	private String loginIp;
-	private String userAuthToken;
 	
 //	private boolean rememberId;
 	
@@ -42,10 +42,10 @@ public class LoginVO {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	public Date getLoginDt() {
+	public String getLoginDt() {
 		return loginDt;
 	}
-	public void setLoginDt(Date loginDt) {
+	public void setLoginDt(String loginDt) {
 		this.loginDt = loginDt;
 	}
 	public String getLoginResultCode() {
@@ -59,12 +59,6 @@ public class LoginVO {
 	}
 	public void setLoginIp(String loginIp) {
 		this.loginIp = loginIp;
-	}
-	public String getUserAuthToken() {
-		return userAuthToken;
-	}
-	public void setUserAuthToken(String userAuthToken) {
-		this.userAuthToken = userAuthToken;
 	}
 		
 //		public boolean isRememberId() {

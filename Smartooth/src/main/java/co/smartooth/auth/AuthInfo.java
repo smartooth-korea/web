@@ -1,14 +1,14 @@
 package co.smartooth.auth;
 
 //회원 정보 세션 유지
-public class LoginAuthInfo {
+public class AuthInfo {
 
 	private String id;
 	private String name;
 //	private int grade;
 
 //	public LoginAuthInfo(String id, String name, int grade) {
-	public LoginAuthInfo(String id, String name) {
+	public AuthInfo(String id, String name) {
 		this.id = id;
 		this.name = name;
 //		this.grade = grade;

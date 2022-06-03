@@ -41,7 +41,7 @@
     - ALL > TRACE > DEBUG > INFO > WARN > ERROR > FATAL > OFF
 -->
 <root>
-  <level value="ALL" />
+  <level value="DEBUG" />
   <appender-ref ref="dailyFile"/>
 </root>
  

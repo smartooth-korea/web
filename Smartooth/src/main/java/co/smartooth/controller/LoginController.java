@@ -18,21 +18,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import co.smartooth.service.LoginService;
+import co.smartooth.service.AuthService;
+import co.smartooth.service.LogService;
 import co.smartooth.service.UserService;
 import co.smartooth.utils.AES256Util;
-import co.smartooth.utils.TokenUtil;
-import co.smartooth.vo.LoginVO;
+import co.smartooth.utils.JwtTokenUtil;
+import co.smartooth.vo.AuthVO;
+import co.smartooth.vo.TeethInfoVO;
+import co.smartooth.vo.TeethMeasureVO;
 import co.smartooth.vo.UserVO;
 
 @RestController
 public class LoginController {
 
 	@Autowired(required = false)
-	private LoginService loginService;
+	private AuthService authService;
 
 	@Autowired(required = false)
 	private UserService userService;
+	
+	@Autowired(required = false)
+	private LogService logService;
+	
 
 
 	@RequestMapping(value = "/")
@@ -42,12 +49,12 @@ public class LoginController {
 	
 	//	 관리자 웹 로그인
 	@RequestMapping(value = {"/login.do"}, method = RequestMethod.POST)
-    public String webLogin(LoginVO loginVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
+    public String webLogin(AuthVO authVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
         
 //      쿠키가 되도록 변경해야함  
 //		if(rememberCookie!=null) {
-//            loginVO.setUserId(rememberCookie.getValue());
-//            loginVO.setRememberId(true);
+//            authVO.setUserId(rememberCookie.getValue());
+//            authVO.setRememberId(true);
 //        }
 		System.out.println("login.do");
 		return "redirect:/main.do";
@@ -91,86 +98,94 @@ public class LoginController {
 	@ResponseBody
 	public HashMap<String,Object> appLogin(@RequestBody HashMap<String, Object> paramMap) {
        
-		TokenUtil tokenUtil = new TokenUtil();
-		
-		HashMap<String,Object> hm = new HashMap<String,Object>();
-		
-		List<UserVO> data = new ArrayList<UserVO>();
-		
-		LoginVO loginVO = new LoginVO();
-		UserVO userVO = new UserVO();
-		
-		String userPwd = "";
-		String userId = "";
-		String userAuthToken = "";
-		String loginIp = (String)paramMap.get("LOGIN_IP");
+		String userPwd = null;
+		String userId = null;
+		String loginIp = null;
+		String userAuthToken = null;
 		
 		int loginChkByIdPwd = 0;
 		int isIdExist = 0;
 		
-		Date now = new Date();
+		HashMap<String,Object> hm = new HashMap<String,Object>();
 		
-		userId= (String)paramMap.get("USER_ID");
-		userAuthToken = tokenUtil.createToken(userId);
+		List<UserVO> userInfo = new ArrayList<UserVO>();
+		List<TeethInfoVO> userTeethInfo = new ArrayList<TeethInfoVO>();
+		
+		AuthVO authVO = new AuthVO();
+		UserVO userVO = new UserVO();
+		
+		
+		// 오늘 일자 계산
+		Date tmpDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+		String sysDate = sdf.format(tmpDate);
+		
+		// 파라미터 >> 값 setting
+		userId= (String)paramMap.get("userId");
+		loginIp = (String)paramMap.get("loginIp"); 
 		
 		// 비밀번호 암호화 
 		AES256Util aes256Util = new AES256Util();
-		userPwd = aes256Util.aesEncode((String)paramMap.get("USER_PWD"));
+		userPwd = aes256Util.aesEncode((String)paramMap.get("userPwd"));
 		
 		if(userPwd.equals("false")) { // 암호화에 실패할 경우
 			hm.put("code", "500");
-			hm.put("msg", "서버 오류(암호화)");
+			hm.put("msg", "Server Error");
 			return hm;
 		}
 		
 		// 로그인 VO
-		loginVO.setUserId(userId);
-		loginVO.setUserPwd(userPwd);
-		loginVO.setUserAuthToken(userAuthToken);
-		loginVO.setLoginDt(now);
-
+		authVO.setUserId(userId);
+		authVO.setUserPwd(userPwd);
+		authVO.setLoginDt(sysDate);
 		// 회원 VO
 		userVO.setUserId(userId);
-		userVO.setUserAuthToken(userAuthToken);
 		
 		try {
 			// 로그인 확인
-			loginChkByIdPwd = loginService.loginChkByIdPwd(loginVO);
+			loginChkByIdPwd = authService.loginChkByIdPwd(authVO);
 			if(loginChkByIdPwd == 0){ // 0일 경우는 Database에 ID와 비밀번호가 틀린 것
-				isIdExist = loginService.isIdExist(loginVO.getUserId());
-				if(isIdExist == 0) {
-					hm.put("code", "404");
-					hm.put("msg", "존재하지 않는 아이디 입니다.");
-				}else {
-					hm.put("code", "405");
-					hm.put("msg", "비밀번호가 틀렸습니다.");
-				}
-			}else { // 로그인이 정상적으로 완료된 경우 회원의 정보를 제공하고 LOG를 INSERT
 
-				loginService.updateUserAuthToken(loginVO);
-				loginService.updateLoginDt(loginVO);
+				isIdExist = authService.isIdExist(authVO.getUserId());
+				if(isIdExist == 0) { // ID가 존재하지 않을 경우
+					hm.put("code", "405");
+					hm.put("msg", "This ID does not exist.");
+				}else { // PWD가 틀렸을 경우
+					hm.put("code", "406");
+					hm.put("msg", "The password is wrong.");
+				}
+			}else { // ID와 PWD가 검증된 이후 JWT 토큰과 회원의 정보를 제공하고 LOG를 INSERT
+
+				// JWT TOKEN 발행
+				JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+				userAuthToken = jwtTokenUtil.createToken(authVO);
+				
+				// 로그인 일자 업데이트
+				logService.updateLoginDt(authVO);
 				
 				// 로그인 시 회원의 정보를 가져옴 :: List<UserVO>
-				data = userService.selectUserInfo(userVO);
+				userInfo = userService.selectUserInfo(userVO);
+				userTeethInfo = userService.selectUserTeethInfo(userVO);
 				
-				// 회원의 정보를 LoginVO에 담고 LOG 테이블 INSERT 파라미터로 전달
-				loginVO.setUserNo(data.get(0).getUserNo());
-				loginVO.setUserType(data.get(0).getUserType());
-				loginVO.setLoginDt(data.get(0).getLoginDt());
-				loginVO.setLoginResultCode("000");
-				loginVO.setLoginIp(loginIp);
+				// 회원의 정보를 authVO에 담고 LOG 테이블 INSERT 파라미터로 전달
+				authVO.setUserNo(userInfo.get(0).getUserNo());
+				authVO.setUserType(userInfo.get(0).getUserType());
+				authVO.setLoginDt(userInfo.get(0).getLoginDt());
+				authVO.setLoginResultCode("000");
+				authVO.setLoginIp(loginIp);
 				
-				loginService.insertUserLoginHistory(loginVO);
+				logService.insertUserLoginHistory(authVO);
 				
-				hm.put("data", data);
-				hm.put("USER_AUTH_TOKEN", userAuthToken);
-				hm.put("USER_NO", data.get(0).getUserNo());
+				hm.put("userInfo", userInfo);
+				hm.put("userTeethInfo", userTeethInfo);
+				hm.put("userNo", userInfo.get(0).getUserNo());
+				hm.put("userAuthToken", userAuthToken);
 				hm.put("code", "000");
-				hm.put("msg", "로그인 성공");
+				hm.put("msg", "Login Success");
 			}
 		} catch (Exception e) {
 			hm.put("code", "500");
-			hm.put("msg", "서버 오류");
+			hm.put("msg", "Server Error");
 			e.printStackTrace();
 		}
 		return hm;

@@ -8,27 +8,20 @@
 </head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function(){
-
+	
+	//[요청 json 데이터 선언] ::: 치아 측정
+// 	var jsonData = { 
+// 		"USER_ID" : "jungjuhyun12@gmail.com"
+// 	};
+	
 	$('#submit').click(function(){ 
 		$.ajax({
 			type:'POST',   //post 방식으로 전송
-			url:'/app/user/register.do',   //데이터를 주고받을 파일 주소
+			url:'/app/user/signUp/emailAuth.do',   //데이터를 주고받을 파일 주소
+// 			url:'/app/user/signUp/emailAuthChk.do',   //데이터를 주고받을 파일 주소
 			data:JSON.stringify ({
-				"userId" : "test"
-				,"userPwd" : "1234"
-				,"userNm" : "관리자"
-				,"userNickname" : "관리자"
-				,"userType" : "G"
-				,"userBirthday" : "2019-01-09"
-				,"userCountry" : "KR"
-				,"userState" : ""
-				,"userAddress" : "청화대"
-				,"userTelNo" : "010-0000-0000"
-				,"userSex" : "M"
-				,"pushToken" : "P.U.S.H.T.O.K.E.N"
-				,"teethStatus" : "200|100|100|100|100|100|100|100|100|100|100|100|100|100|100|200|100|100|100|100|100|100|100|100|100|100|100|100|100|100|100|100"
+				"userId" : "jungjuhyun12@gmail.com"
 			}),   //위의 변수에 담긴 데이터를 전송해준다.
 			dataType:'JSON',   //json 파일 형식으로 값을 담아온다.
 			contentType : "application/json; charset=UTF-8",
@@ -37,20 +30,14 @@ $(document).ready(function(){
 			}
 		});
 	});
-
-
 });
-
-
-
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1425013891296132&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Meta Pixel Code -->
-
 </script>
 <body>
-	<input type="button" id="submit" value="버튼"/>
+<!-- 	<form id="frm" name="frm" action="/app/user/login.do" method="post"> -->
+<!-- 	<form id="frm" name="frm" action="/app/user/signUp/emailAuth.do" method="post"> -->
+<!-- 		<input type="text" id="USER_ID" name="USER_ID" value="jungjuhyun12@gmail.com"/>  -->
+		회원가입 이메일 발송 :: 
+		<input type="button" id="submit" value="버튼"/>
+<!-- 	</form> -->
 </body>
 </html>
