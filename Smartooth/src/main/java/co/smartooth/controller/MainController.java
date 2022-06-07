@@ -18,7 +18,7 @@ public class MainController {
 //	    return "/main";
 //	  }
 	
-	@GetMapping("/")
+	@GetMapping("/test")
 	public String main() {
 		return "test";
 	}
