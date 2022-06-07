@@ -8,7 +8,7 @@
 </head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	alert("테스트다임마")	
+	alert("테스트다임마");
 </script>
 <body>
 	<form id="frm" name="frm" action="/app/user/login.do" method="post">
