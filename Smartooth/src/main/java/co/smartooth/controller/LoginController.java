@@ -40,50 +40,30 @@ public class LoginController {
 	private LogService logService;
 	
 
-
-	@RequestMapping(value = "/")
-	public String selectUserInfo() {
-		System.out.println("/");
-		return "login/loginForm";
-	}
-	
-	//	 관리자 웹 로그인
-	@RequestMapping(value = {"/login.do"}, method = RequestMethod.POST)
-    public String webLogin(AuthVO authVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
-        
+//	관리자 웹 로그인
+//	@RequestMapping(value = {"/login.do"}, method = RequestMethod.POST)
+//    public String webLogin(AuthVO authVO, @CookieValue(value="REMEMBER", required=false) Cookie rememberCookie) throws Exception {
+//        
 //      쿠키가 되도록 변경해야함  
 //		if(rememberCookie!=null) {
 //            authVO.setUserId(rememberCookie.getValue());
 //            authVO.setRememberId(true);
 //        }
 //		System.out.println("login.do");
-		return "redirect:/main.do";
-	}
-	
-	
-	@RequestMapping(value = {"/logout"})
-    public ModelAndView logout(HttpSession session) {
-        session.invalidate();
-        ModelAndView mv = new ModelAndView("redirect:/");
-        return mv;
-    }
-	
-	
-	
-	
-
-	
-	
-	
+//		return "redirect:/main.do";
+//	}
+//
+//	관리자 웹 로그아웃
+//	@RequestMapping(value = {"/logout"})
+//    public ModelAndView logout(HttpSession session) {
+//        session.invalidate();
+//        ModelAndView mv = new ModelAndView("redirect:/");
+//        return mv;
+//    }
 	
 /************************************************************************************************************/	
 /**																							 APP																							**/
 /************************************************************************************************************/
-	
-	
-	
-	
-	
 	
 	/**
 	 * 기능   : 앱 로그인 요청
