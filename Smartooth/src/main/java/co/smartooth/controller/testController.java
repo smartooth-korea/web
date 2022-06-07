@@ -10,11 +10,6 @@ public class testController {
 	
 	@Autowired(required = false)
 
-	@RequestMapping(value = {"/test"})
-	public String test() {
-		return "test";
-	}
-	
 	@RequestMapping(value = {"/register"})
 	public String regist() {
 		return "register";
