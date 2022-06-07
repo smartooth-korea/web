@@ -176,7 +176,7 @@ public void sendMail(String userId) throws Exception{
 			
 		// text로만 보내고 싶을 경우 setText를 사용 (msg.setText(sb.toString());)
 		// html로 보내고 싶을 경우 setContents 사용
-		msg.setContent(sb.toString(), "text/html;charset=euc-kr");
+		msg.setContent(sb.toString(), "text/html;charset=utf-8");
 		// Transport는 메일을 최종적으로 보내는 클래스로 메일을 전송			
 		Transport.send(msg);
 	}
@@ -285,7 +285,7 @@ public void sendMail(String userId) throws Exception{
 				
 			// text로만 보내고 싶을 경우 setText를 사용 (msg.setText(sb.toString());)
 			// html로 보내고 싶을 경우 setContents 사용
-			msg.setContent(sb.toString(), "text/html;charset=euc-kr");
+			msg.setContent(sb.toString(), "text/html;charset=utf-8");
 			// Transport는 메일을 최종적으로 보내는 클래스로 메일을 전송			
 			Transport.send(msg);
 		}

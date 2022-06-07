@@ -1,129 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-
-$(document).ready(function(){
-
-
-
-	//[¿äÃ» json µ¥ÀÌÅÍ ¼±¾ğ] ::: Ä¡¾Æ ÃøÁ¤
-// 	var jsonData = { // Body¿¡ Ã·ºÎÇÒ json µ¥ÀÌÅÍ
-// 		{"USER_ID" : "jungjuhyun12@gmail.com"
-// 		,"USER_NO" : "KR-I-0002"
-// 		,"T01" : "01"
-// 		,"T02" : "02"
-// 		,"T03" : "03"
-// 		,"T04" : "04"
-// 		,"T05" : "05"
-// 		,"T06" : "06"
-// 		,"T07" : "07"
-// 		,"T08" : "08"
-// 		,"T09" : "09"
-// 		,"T10" : "10"
-// 		,"T11" : "11"
-// 		,"T12" : "12"
-// 		,"T13" : "13"
-// 		,"T14" : "14"
-// 		,"T15" : "15"
-// 		,"T16" : "16"
-// 		,"T17" : "17"
-// 		,"T18" : "18"
-// 		,"T19" : "19"
-// 		,"T20" : "20"
-// 		,"T21" : "21"
-// 		,"T22" : "22"
-// 		,"T23" : "23"
-// 		,"T24" : "24"
-// 		,"T25" : "25"
-// 		,"T26" : "26"
-// 		,"T27" : "27"
-// 		,"T28" : "28"
-// 		,"T29" : "29"
-// 		,"T30" : "30"
-// 		,"T31" : "31"
-// 		,"T32" : "32"}
-// 	};
-	
-// 	$('#submit').click(function(){ 
-// 		alert("1");
-// 		$.ajax({
-// 			type:'POST',   //post ¹æ½ÄÀ¸·Î Àü¼Û
-// 			url:'/app/user/insertMeasureValue.do',   //µ¥ÀÌÅÍ¸¦ ÁÖ°í¹ŞÀ» ÆÄÀÏ ÁÖ¼Ò
-// 			data:jsonData,   //À§ÀÇ º¯¼ö¿¡ ´ã±ä µ¥ÀÌÅÍ¸¦ Àü¼ÛÇØÁØ´Ù.
-// 			dataType:'html',   //html ÆÄÀÏ Çü½ÄÀ¸·Î °ªÀ» ´ã¾Æ¿Â´Ù.
-// 			success : function(data){   //ÆÄÀÏ ÁÖ°í¹Ş±â°¡ ¼º°øÇßÀ» °æ¿ì. data º¯¼ö ¾È¿¡ °ªÀ» ´ã¾Æ¿Â´Ù.
-// 				$('#message').html(data);  //ÇöÀç È­¸é À§ id="message" ¿µ¿ª ¾È¿¡ data¾È¿¡ ´ã±ä html ÄÚµå¸¦ ³Ö¾îÁØ´Ù. 
-// 			}
-// 		});
-// 	});
-
-
-	//[¿äÃ» json µ¥ÀÌÅÍ ¼±¾ğ] ::: È¸¿ø°¡ÀÔ µ¥ÀÌÅÍ
-// 	var jsonData = { // Body¿¡ Ã·ºÎÇÒ json µ¥ÀÌÅÍ
-// 		"USER_ID" : "jungjuhyun12@gmail.com"
-// 		,"USER_PWD" : "1234"
-// 		,"USER_TYPE" : "I"
-// 		,"USER_NM" : "°ü¸®ÀÚ"
-// 		,"USER_NICKNAME" : "ÇÁ·ĞÆ®¸Ç"
-// 		,"USER_BIRTHDAY" : "1988-01-11"
-// 		,"USER_COUNTRY" : "KR"
-// 		,"USER_STATE" : ""
-// 		,"USER_ADDRESS" : "¼­¿ï½Ã ½ÅÁ¤µ¿ 1004-11 102È£"
-// 		,"USER_TEL_NO" : "010-9937-4921"
-// 		,"USER_SEX" : "M"
-// 		,"PUSH_TOKEN" : "P.U.S.H.T.O.K.E.N"
-// 		,"TEETH_STATUS" : "123|456|789|012"
-// 	};
-	
-// 	$('#submit').click(function(){ 
-// 		$.ajax({
-// 			type:'POST',   //post ¹æ½ÄÀ¸·Î Àü¼Û
-// 			url:'/app/user/register.do',   //µ¥ÀÌÅÍ¸¦ ÁÖ°í¹ŞÀ» ÆÄÀÏ ÁÖ¼Ò
-// 			data:jsonData,   //À§ÀÇ º¯¼ö¿¡ ´ã±ä µ¥ÀÌÅÍ¸¦ Àü¼ÛÇØÁØ´Ù.
-// 			dataType:'html',   //html ÆÄÀÏ Çü½ÄÀ¸·Î °ªÀ» ´ã¾Æ¿Â´Ù.
-// 			success : function(data){   //ÆÄÀÏ ÁÖ°í¹Ş±â°¡ ¼º°øÇßÀ» °æ¿ì. data º¯¼ö ¾È¿¡ °ªÀ» ´ã¾Æ¿Â´Ù.
-// 				$('#message').html(data);  //ÇöÀç È­¸é À§ id="message" ¿µ¿ª ¾È¿¡ data¾È¿¡ ´ã±ä html ÄÚµå¸¦ ³Ö¾îÁØ´Ù. 
-// 			}
-// 		});
-// 	});
-
-
-// 	var jsonData = { // Body¿¡ Ã·ºÎÇÒ json µ¥ÀÌÅÍ
-// 			"USER_ID" : "jungjuhyun12@gmail.com"
-// 			,"USER_PWD" : "1234"
-// 			,"USER_AUTH_KEY" : "USER.AUTH.KEY"
-// 		};
-		
-// 		$('#submit').click(function(){ 
-// 			$.ajax({
-// 				type:'POST',   //post ¹æ½ÄÀ¸·Î Àü¼Û
-// 				url:'/app/user/login.do',   //µ¥ÀÌÅÍ¸¦ ÁÖ°í¹ŞÀ» ÆÄÀÏ ÁÖ¼Ò
-// 				data:jsonData,   //À§ÀÇ º¯¼ö¿¡ ´ã±ä µ¥ÀÌÅÍ¸¦ Àü¼ÛÇØÁØ´Ù.
-// 				dataType:'html',   //html ÆÄÀÏ Çü½ÄÀ¸·Î °ªÀ» ´ã¾Æ¿Â´Ù.
-// 				success : function(data){   //ÆÄÀÏ ÁÖ°í¹Ş±â°¡ ¼º°øÇßÀ» °æ¿ì. data º¯¼ö ¾È¿¡ °ªÀ» ´ã¾Æ¿Â´Ù.
-// 					$('#message').html(data);  //ÇöÀç È­¸é À§ id="message" ¿µ¿ª ¾È¿¡ data¾È¿¡ ´ã±ä html ÄÚµå¸¦ ³Ö¾îÁØ´Ù. 
-// 				}
-// 			});
-// 		});
-
-// });
-
-
-	
+	alert("í…ŒìŠ¤íŠ¸ë‹¤ì„ë§ˆ")	
 </script>
 <body>
 	<form id="frm" name="frm" action="/app/user/login.do" method="post">
 		<input type="text" id="USER_ID" name="USER_ID" value="jungjuhyun12@gmail.com"/> 
 		<input type="text" id="USER_PWD" name="USER_PWD" value="1234"/> 
 		<input type="text" id="USER_AUTH_KEY" name="USER_AUTH_KEY" value="USER.AUTH.KEY"/> 
-		<input type="submit" value="¹öÆ°"/>
+		<input type="submit" value="ë²„íŠ¼"/>
 	</form>
 </body>
 </html>

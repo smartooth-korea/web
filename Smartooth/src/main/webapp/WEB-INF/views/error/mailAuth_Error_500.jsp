@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	ÀÎÁõ¹øÈ£ ¹ßÇà¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.
-	ÀÎÁõ¹øÈ£¸¦ ´Ù½Ã ¿äÃ»ÇØÁÖ¼¼¿ä.
+	ì¸ì¦ë²ˆí˜¸ ë°œí–‰ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.
+	ì¸ì¦ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ìš”ì²­í•´ì£¼ì„¸ìš”.
 </body>
 </html>
